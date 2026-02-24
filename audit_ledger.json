@@ -666,5 +666,467 @@
     "metadata": {
       "activeProviders": 1
     }
+  },
+  {
+    "id": "audit-1771960597001-3u6v9gc97",
+    "timestamp": 1771960597001,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 5000000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 100,
+      "networkComputeLoad": 0.2,
+      "policyViolationFrequency": 0.01,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.1,
+      "predictiveStressLevel": 0
+    },
+    "description": "Environmental state updated via aggregation from 2 providers.",
+    "metadata": {
+      "activeProviders": 2
+    }
+  },
+  {
+    "id": "audit-1771960598016-n1xsj17d8",
+    "timestamp": 1771960598016,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 5000000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 100,
+      "networkComputeLoad": 0.2,
+      "policyViolationFrequency": 0.01,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.1,
+      "predictiveStressLevel": 0
+    },
+    "description": "Environmental state updated via aggregation from 2 providers.",
+    "metadata": {
+      "activeProviders": 2
+    }
+  },
+  {
+    "id": "audit-1771960599017-e0m9ec7c2",
+    "timestamp": 1771960599017,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 5000000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 100,
+      "networkComputeLoad": 0.2,
+      "policyViolationFrequency": 0.01,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.1,
+      "predictiveStressLevel": 0
+    },
+    "description": "Environmental state updated via aggregation from 2 providers.",
+    "metadata": {
+      "activeProviders": 2
+    }
+  },
+  {
+    "id": "audit-1771960600023-3r9uzpqx3",
+    "timestamp": 1771960600023,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 5000000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 200,
+      "networkComputeLoad": 0.3,
+      "policyViolationFrequency": 0.01,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.1,
+      "predictiveStressLevel": 0
+    },
+    "description": "Environmental state updated via aggregation from 2 providers.",
+    "metadata": {
+      "activeProviders": 2
+    }
+  },
+  {
+    "id": "audit-1771960601042-242bprib2",
+    "timestamp": 1771960601042,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 5000000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 200,
+      "networkComputeLoad": 0.3,
+      "policyViolationFrequency": 0.01,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.1,
+      "predictiveStressLevel": 0
+    },
+    "description": "Environmental state updated via aggregation from 2 providers.",
+    "metadata": {
+      "activeProviders": 2
+    }
+  },
+  {
+    "id": "audit-1771960602073-08z7gk5g3",
+    "timestamp": 1771960602073,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 5000000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 200,
+      "networkComputeLoad": 0.3,
+      "policyViolationFrequency": 0.01,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.1,
+      "predictiveStressLevel": 0
+    },
+    "description": "Environmental state updated via aggregation from 2 providers.",
+    "metadata": {
+      "activeProviders": 2
+    }
+  },
+  {
+    "id": "audit-1771960603166-p5mx9dnw8",
+    "timestamp": 1771960603166,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 5000000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 1200,
+      "networkComputeLoad": 0.3,
+      "policyViolationFrequency": 0.04,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.5,
+      "predictiveStressLevel": 0
+    },
+    "description": "Environmental state updated via aggregation from 2 providers.",
+    "metadata": {
+      "activeProviders": 2
+    }
+  },
+  {
+    "id": "audit-1771960604173-6yv5qmgz6",
+    "timestamp": 1771960604173,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 5000000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 1200,
+      "networkComputeLoad": 0.3,
+      "policyViolationFrequency": 0.04,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.5,
+      "predictiveStressLevel": 0.01946156341226079
+    },
+    "description": "Environmental state updated via aggregation from 2 providers.",
+    "metadata": {
+      "activeProviders": 2
+    }
+  },
+  {
+    "id": "audit-1771960605186-lrpjo5ukm",
+    "timestamp": 1771960605186,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 5000000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 1200,
+      "networkComputeLoad": 0.3,
+      "policyViolationFrequency": 0.04,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.5,
+      "predictiveStressLevel": 0.032298652653689856
+    },
+    "description": "Environmental state updated via aggregation from 2 providers.",
+    "metadata": {
+      "activeProviders": 2
+    }
+  },
+  {
+    "id": "audit-1771960606325-vuth1wjhx",
+    "timestamp": 1771960606325,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 2800000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 1600,
+      "networkComputeLoad": 0.75,
+      "policyViolationFrequency": 0.04,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.5,
+      "predictiveStressLevel": 0.040498096322805294
+    },
+    "description": "Environmental state updated via aggregation from 2 providers.",
+    "metadata": {
+      "activeProviders": 2
+    }
+  },
+  {
+    "id": "audit-1771960606673-z9vt3zn3c",
+    "timestamp": 1771960606673,
+    "eventType": "ESCALATION_TRIGGER",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 2800000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 1600,
+      "networkComputeLoad": 0.75,
+      "policyViolationFrequency": 0.04,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.5,
+      "predictiveStressLevel": 0.040498096322805294
+    },
+    "description": "ELEVATED: Preemptive risk mitigation active. Authority limits tightened.",
+    "behavioralAdjustments": {
+      "newTier": "ELEVATED",
+      "oldTier": "STABLE",
+      "authorityMultiplier": 0.75,
+      "budgetMultiplier": 0.85,
+      "delegationContraction": 0.8
+    },
+    "metadata": {
+      "rationale": "ELEVATED: Preemptive risk mitigation active. Authority limits tightened."
+    }
+  },
+  {
+    "id": "audit-1771960607335-jeziyzojw",
+    "timestamp": 1771960607335,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 2800000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 1600,
+      "networkComputeLoad": 0.75,
+      "policyViolationFrequency": 0.04,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.5,
+      "predictiveStressLevel": 0.08691585157561876
+    },
+    "description": "Environmental state updated via aggregation from 2 providers.",
+    "metadata": {
+      "activeProviders": 2
+    }
+  },
+  {
+    "id": "audit-1771960607857-1btpmotir",
+    "timestamp": 1771960607857,
+    "eventType": "ADAPTIVE_CONTRACTION",
+    "contributingMetrics": {
+      "predictiveStressLevel": 0.08691585157561876
+    },
+    "affectedAgents": [
+      "agent_007"
+    ],
+    "behavioralAdjustments": {
+      "actionFrequencyMultiplier": 0.6,
+      "priorityMode": "balanced",
+      "budgetReallocationFactor": 1,
+      "riskToleranceLimit": 60
+    },
+    "description": "Adaptive behavior policy computed for agent_007: ENHANCED: Frequency scaled back due to system stress."
+  },
+  {
+    "id": "audit-1771960608350-rfzmn1unr",
+    "timestamp": 1771960608350,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 2800000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 1600,
+      "networkComputeLoad": 0.75,
+      "policyViolationFrequency": 0.04,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.5,
+      "predictiveStressLevel": 0.12407215259146757
+    },
+    "description": "Environmental state updated via aggregation from 2 providers.",
+    "metadata": {
+      "activeProviders": 2
+    }
+  },
+  {
+    "id": "audit-1771960609362-16nd21bfi",
+    "timestamp": 1771960609362,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 2800000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 3200,
+      "networkComputeLoad": 0.88,
+      "policyViolationFrequency": 0.18,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.5,
+      "predictiveStressLevel": 0.15373538198959966
+    },
+    "description": "Environmental state updated via aggregation from 2 providers.",
+    "metadata": {
+      "activeProviders": 2
+    }
+  },
+  {
+    "id": "audit-1771960609368-5zx560uky",
+    "timestamp": 1771960609368,
+    "eventType": "ESCALATION_TRIGGER",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 2800000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 3200,
+      "networkComputeLoad": 0.88,
+      "policyViolationFrequency": 0.18,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.5,
+      "predictiveStressLevel": 0.15373538198959966
+    },
+    "description": "HIGH: Significant system stress detected. Multi-agent confirmation activated.",
+    "behavioralAdjustments": {
+      "newTier": "HIGH",
+      "oldTier": "ELEVATED",
+      "authorityMultiplier": 0.4,
+      "budgetMultiplier": 0.5,
+      "delegationContraction": 0.5
+    },
+    "metadata": {
+      "rationale": "HIGH: Significant system stress detected. Multi-agent confirmation activated."
+    }
+  },
+  {
+    "id": "audit-1771960610375-rwumqipwl",
+    "timestamp": 1771960610375,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 2800000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 3200,
+      "networkComputeLoad": 0.88,
+      "policyViolationFrequency": 0.18,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.5,
+      "predictiveStressLevel": 0.1907728649663451
+    },
+    "description": "Environmental state updated via aggregation from 2 providers.",
+    "metadata": {
+      "activeProviders": 2
+    }
+  },
+  {
+    "id": "audit-1771960610825-9se7zy66c",
+    "timestamp": 1771960610825,
+    "eventType": "ADAPTIVE_CONTRACTION",
+    "contributingMetrics": {
+      "predictiveStressLevel": 0.1907728649663451
+    },
+    "affectedAgents": [
+      "agent_007"
+    ],
+    "behavioralAdjustments": {
+      "actionFrequencyMultiplier": 0.6,
+      "priorityMode": "cooperative",
+      "budgetReallocationFactor": 1,
+      "riskToleranceLimit": 60
+    },
+    "description": "Adaptive behavior policy computed for agent_007: ENHANCED: Frequency scaled back due to system stress. STABILITY CRITICAL: Defaulting to cooperative mode."
+  },
+  {
+    "id": "audit-1771960611706-k7jkkg26n",
+    "timestamp": 1771960611706,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {},
+    "description": "Tier definition updated for HIGH",
+    "behavioralAdjustments": {
+      "tier": "HIGH",
+      "newDefinition": {
+        "authorityLimitMultiplier": 0.42000000000000004,
+        "budgetCeilingMultiplier": 0.525
+      }
+    }
+  },
+  {
+    "id": "audit-1771960611826-urlufx3ru",
+    "timestamp": 1771960611826,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 2800000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 3200,
+      "networkComputeLoad": 0.88,
+      "policyViolationFrequency": 0.18,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.5,
+      "predictiveStressLevel": 0.220429285222835
+    },
+    "description": "Environmental state updated via aggregation from 2 providers.",
+    "metadata": {
+      "activeProviders": 2
+    }
+  },
+  {
+    "id": "audit-1771960612866-wr401ul4h",
+    "timestamp": 1771960612866,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 4500000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 400,
+      "networkComputeLoad": 0.88,
+      "policyViolationFrequency": 0.02,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.2,
+      "predictiveStressLevel": 0.24238259561392883
+    },
+    "description": "Environmental state updated via aggregation from 2 providers.",
+    "metadata": {
+      "activeProviders": 2
+    }
+  },
+  {
+    "id": "audit-1771960613782-pfpbtszc8",
+    "timestamp": 1771960613782,
+    "eventType": "ADAPTIVE_CONTRACTION",
+    "contributingMetrics": {
+      "predictiveStressLevel": 0.24238259561392883
+    },
+    "affectedAgents": [
+      "agent_007"
+    ],
+    "behavioralAdjustments": {
+      "actionFrequencyMultiplier": 0.6,
+      "priorityMode": "balanced",
+      "budgetReallocationFactor": 1,
+      "riskToleranceLimit": 60
+    },
+    "description": "Adaptive behavior policy computed for agent_007: ENHANCED: Frequency scaled back due to system stress."
+  },
+  {
+    "id": "audit-1771960613867-xd9fmtoxf",
+    "timestamp": 1771960613867,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 4500000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 400,
+      "networkComputeLoad": 0.88,
+      "policyViolationFrequency": 0.02,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.2,
+      "predictiveStressLevel": 0.22675831016811904
+    },
+    "description": "Environmental state updated via aggregation from 2 providers.",
+    "metadata": {
+      "activeProviders": 2
+    }
+  },
+  {
+    "id": "audit-1771960614866-0g5xefmuy",
+    "timestamp": 1771960614866,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 4500000,
+      "pooledBudgetUtilization": 0.1,
+      "aggregateAgentRiskExposure": 400,
+      "networkComputeLoad": 0.88,
+      "policyViolationFrequency": 0.02,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0.2,
+      "predictiveStressLevel": 0.21426271030353453
+    },
+    "description": "Environmental state updated via aggregation from 2 providers.",
+    "metadata": {
+      "activeProviders": 2
+    }
   }
 ]
