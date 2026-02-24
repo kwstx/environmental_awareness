@@ -1,0 +1,56 @@
+﻿=== Stability Feedback Engine Integration Test ===
+
+[StateAggregationEngine] Provider registered: TestingRiskProvider
+[StateAggregationEngine] Engine started. Update interval: 500ms
+
+[Simulating] Rapidly rising risk (Scenario: Weak Intervention)
+[RiskEscalationModule] TIER CHANGE: STABLE -> ELEVATED
+[RiskEscalationModule] Rationale: ELEVATED: Preemptive risk mitigation active. Authority limits tightened.
+[StabilityFeedbackEngine] Analyzing intervention: STABLE -> ELEVATED
+[Simulating] Risk continues to grow despite escalation...
+[RiskEscalationModule] TIER CHANGE: ELEVATED -> HIGH
+[RiskEscalationModule] Rationale: HIGH: Significant system stress detected. Multi-agent confirmation activated.
+[StabilityFeedbackEngine] Analyzing intervention: ELEVATED -> HIGH
+[StabilityFeedbackEngine] Intervention Result: ESCALATION
+ > Success Score: 71.5%
+ > Risk Control: 0.44
+ > Treasury Pres: 1.00
+
+[STABILITY REPORT] Intervention ID: inv_1771939875592
+ > Result: SUCCESS
+ > Score: 71.5%
+ > Risk Propagation Control: 0.44
+ > Current ELEVATED Risk Threshold: 1500
+ > ELEVATED Auth Multiplier: 0.750
+
+[Simulating] Risk dropping due to tightened rules...
+[StabilityFeedbackEngine] Intervention Result: ESCALATION
+ > Success Score: 100.0%
+ > Risk Control: 1.00
+ > Treasury Pres: 1.00
+[StabilityFeedbackEngine] High effectiveness. Relaxing constraints for efficiency.
+[RiskEscalationModule] Tier definition updated for HIGH
+
+[STABILITY REPORT] Intervention ID: inv_1771939876104
+ > Result: SUCCESS
+ > Score: 100.0%
+ > Risk Propagation Control: 1.00
+ > Current ELEVATED Risk Threshold: 1500
+ > ELEVATED Auth Multiplier: 0.750
+[RiskEscalationModule] TIER CHANGE: HIGH -> STABLE
+[RiskEscalationModule] Rationale: System is operating within normal parameters.
+[StabilityFeedbackEngine] Analyzing intervention: HIGH -> STABLE
+[StabilityFeedbackEngine] Intervention Result: DE-ESCALATION
+ > Success Score: 100.0%
+ > Risk Control: 1.00
+ > Treasury Pres: 1.00
+
+[STABILITY REPORT] Intervention ID: inv_1771939878110
+ > Result: SUCCESS
+ > Score: 100.0%
+ > Risk Propagation Control: 1.00
+ > Current ELEVATED Risk Threshold: 1500
+ > ELEVATED Auth Multiplier: 0.750
+[StateAggregationEngine] Engine stopped.
+
+Test completed.

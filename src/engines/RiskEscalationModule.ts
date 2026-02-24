@@ -16,7 +16,7 @@ export class RiskEscalationModule extends EventEmitter {
     private activePolicy: RiskEscalationPolicy;
 
     // Thresholds for triggering escalation
-    private readonly THRESHOLDS = {
+    private THRESHOLDS = {
         CRITICAL: {
             riskExposure: 5000,
             violationFrequency: 0.3,
@@ -37,7 +37,7 @@ export class RiskEscalationModule extends EventEmitter {
         }
     };
 
-    private readonly TIER_DEFINITIONS: Record<EscalationTier, Omit<RiskEscalationPolicy, 'rationale'>> = {
+    private TIER_DEFINITIONS: Record<EscalationTier, Omit<RiskEscalationPolicy, 'rationale'>> = {
         [EscalationTier.STABLE]: {
             tier: EscalationTier.STABLE,
             authorityLimitMultiplier: 1.0,
@@ -165,5 +165,47 @@ export class RiskEscalationModule extends EventEmitter {
      */
     public getCurrentTier(): EscalationTier {
         return this.currentTier;
+    }
+
+    /**
+     * Updates the escalation thresholds for a specific level.
+     */
+    public updateThresholds(level: 'ELEVATED' | 'HIGH' | 'CRITICAL', newThresholds: Partial<typeof this.THRESHOLDS['CRITICAL']>): void {
+        this.THRESHOLDS[level] = {
+            ...this.THRESHOLDS[level],
+            ...newThresholds
+        };
+        console.log(`[RiskEscalationModule] Thresholds updated for ${level}`);
+    }
+
+    /**
+     * Updates the definition of a specific escalation tier.
+     */
+    public updateTierDefinition(tier: EscalationTier, definition: Partial<Omit<RiskEscalationPolicy, 'rationale'>>): void {
+        this.TIER_DEFINITIONS[tier] = {
+            ...this.TIER_DEFINITIONS[tier],
+            ...definition
+        } as Omit<RiskEscalationPolicy, 'rationale'>;
+
+        // If we are currently in this tier, update the active policy
+        if (this.currentTier === tier) {
+            this.activePolicy = this.createPolicy(tier, this.activePolicy.rationale);
+        }
+
+        console.log(`[RiskEscalationModule] Tier definition updated for ${EscalationTier[tier]}`);
+    }
+
+    /**
+     * Returns the current thresholds.
+     */
+    public getThresholds(): typeof this.THRESHOLDS {
+        return JSON.parse(JSON.stringify(this.THRESHOLDS));
+    }
+
+    /**
+     * Returns the current tier definitions.
+     */
+    public getTierDefinitions(): Record<EscalationTier, Omit<RiskEscalationPolicy, 'rationale'>> {
+        return JSON.parse(JSON.stringify(this.TIER_DEFINITIONS));
     }
 }
