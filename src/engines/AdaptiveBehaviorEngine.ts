@@ -68,6 +68,18 @@ export class AdaptiveBehaviorEngine {
             rationales.push('ENHANCED: Frequency scaled back due to system stress.');
         }
 
+        // 1b. Proactive throttling based on forecasted stress (Leading Indicator)
+        const predictiveStress = metrics.predictiveStressLevel;
+        if (predictiveStress !== undefined && predictiveStress > 0.3) {
+            // Apply a progressive reduction based on stress level if not already throttled by governance
+            const forecastReduction = Math.max(0.3, 1.0 - predictiveStress);
+            if (forecastReduction < policy.actionFrequencyMultiplier) {
+                policy.actionFrequencyMultiplier = forecastReduction;
+                policy.riskToleranceLimit = Math.floor(100 * forecastReduction);
+                rationales.push(`FORECAST: Proactive throttling due to rising ${(predictiveStress * 100).toFixed(0)}% stress signal.`);
+            }
+        }
+
         // 2. Prioritize cooperative over competitive actions when treasury reserves are low
         // Note: queryState might not return totalTreasuryReserves if not permitted.
         // But the BehaviorEngine logic usually runs with system-level permissions.

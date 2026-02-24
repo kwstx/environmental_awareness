@@ -42,6 +42,12 @@ export interface SystemMetrics {
     ongoingTaskDensity: number;
 
     /**
+     * Forecasted stress level (0.0 to 1.0) based on trend analysis.
+     * Proactively increases as instability markers are detected.
+     */
+    predictiveStressLevel: number;
+
+    /**
      * Extensibility point: Allow for any additional macro-level indicators.
      * This ensures new metrics can be added without breaking existing schema consumers.
      */
@@ -108,7 +114,8 @@ export class GlobalSystemState {
             'networkComputeLoad',
             'policyViolationFrequency',
             'cooperativeEfficiencyScores',
-            'ongoingTaskDensity'
+            'ongoingTaskDensity',
+            'predictiveStressLevel'
         ];
 
         for (const key of required) {

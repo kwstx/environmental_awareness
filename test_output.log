@@ -1,0 +1,77 @@
+﻿=== Environmental Stress Prediction & Proactive Adaptation Test ===
+
+[StateAggregationEngine] Provider registered: MockSystemProvider
+[StateAggregationEngine] Provider registered: StressForecastingEngine
+Starting monitoring loop...
+[StateAggregationEngine] Engine started. Update interval: 500ms
+--- System Stable ---
+
+[SCENARIO 1] Simulating Rapid Treasury Depletion (Leading to instability)...
+ > Snapshot 1: Treasury: 9,150,000
+[Behavior - T+600ms] Freq Multiplier: 1.000, Mode: balanced
+ > Rationale: System is operating within normal parameters.
+ > Snapshot 2: Treasury: 8,300,000
+[StressForecastingEngine] Forecast updated: 12.1%
+ -> Warning: Rapid treasury depletion
+[Behavior - T+1200ms] Freq Multiplier: 1.000, Mode: balanced
+ > Rationale: System is operating within normal parameters.
+ > Snapshot 3: Treasury: 7,450,000
+[StressForecastingEngine] Forecast updated: 15.7%
+ -> Warning: Rapid treasury depletion
+[Behavior - T+1800ms] Freq Multiplier: 1.000, Mode: balanced
+ > Rationale: System is operating within normal parameters.
+ > Snapshot 4: Treasury: 6,600,000
+[StressForecastingEngine] Forecast updated: 18.6%
+ -> Warning: Rapid treasury depletion
+[Behavior - T+2400ms] Freq Multiplier: 1.000, Mode: balanced
+ > Rationale: System is operating within normal parameters.
+ > Snapshot 5: Treasury: 5,750,000
+[StressForecastingEngine] Forecast updated: 20.9%
+ -> Warning: Rapid treasury depletion
+[Behavior - T+3000ms] Freq Multiplier: 1.000, Mode: balanced
+ > Rationale: System is operating within normal parameters.
+[StressForecastingEngine] Forecast updated: 22.7%
+ -> Warning: Rapid treasury depletion
+[StressForecastingEngine] Forecast updated: 24.1%
+ -> Warning: Rapid treasury depletion
+[StressForecastingEngine] Forecast updated: 25.3%
+ -> Warning: Rapid treasury depletion
+[StressForecastingEngine] Forecast updated: 26.3%
+ -> Warning: Rapid treasury depletion
+
+[SCENARIO 2] Simulating Task Density Spike & Performance Degradation...
+ > Density jumped to 300, Efficiency dropped to 40%
+[StressForecastingEngine] Forecast updated: 37.0%
+ -> Warning: Rapid treasury depletion
+ -> Warning: Task density spike
+[StressForecastingEngine] Forecast updated: 45.6%
+ -> Warning: Rapid treasury depletion
+ -> Warning: Task density spike
+[Behavior - Surge Active] Freq Multiplier: 0.630, Mode: balanced
+ > Rationale: FORECAST: Proactive throttling due to rising 37% stress signal.
+[RiskEscalationModule] TIER CHANGE: STABLE -> ELEVATED
+[RiskEscalationModule] Rationale: ELEVATED: Forecasted instability markers. Proactive authority tightening.
+
+[EVENT] Tier Escalation: STABLE -> ELEVATED
+ > Rationale: ELEVATED: Forecasted instability markers. Proactive authority tightening.
+[StressForecastingEngine] Forecast updated: 52.3%
+ -> Warning: Rapid treasury depletion
+ -> Warning: Task density spike
+[StressForecastingEngine] Forecast updated: 55.4%
+ -> Warning: Task density spike
+[StressForecastingEngine] Forecast updated: 55.6%
+ -> Warning: Task density spike
+[StressForecastingEngine] Forecast updated: 55.9%
+ -> Warning: Task density spike
+[StressForecastingEngine] Forecast updated: 56.0%
+ -> Warning: Task density spike
+[StressForecastingEngine] Forecast updated: 56.1%
+ -> Warning: Task density spike
+[Behavior - Post-Surge] Freq Multiplier: 0.440, Mode: balanced
+ > Rationale: ENHANCED: Frequency scaled back due to system stress. FORECAST: Proactive throttling due to rising 56% stress signal.
+
+--- Test Simulation Complete ---
+Final Forecasted Stress: 56.0%
+[Behavior - Final] Freq Multiplier: 0.440, Mode: balanced
+ > Rationale: ENHANCED: Frequency scaled back due to system stress. FORECAST: Proactive throttling due to rising 56% stress signal.
+[StateAggregationEngine] Engine stopped.

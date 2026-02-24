@@ -71,6 +71,11 @@ export class GlobalStateAPI {
             }
         }
 
+        // Always include basic macro-indicators for agent adaptation if they exist
+        if (fullState.metrics.predictiveStressLevel !== undefined) {
+            filteredMetrics.predictiveStressLevel = fullState.metrics.predictiveStressLevel;
+        }
+
         return {
             id: fullState.id,
             timestamp: fullState.timestamp,
@@ -93,11 +98,12 @@ export class GlobalStateAPI {
         const riskLevel = metrics.aggregateAgentRiskExposure;
         const violationRate = metrics.policyViolationFrequency;
         const treasury = metrics.totalTreasuryReserves;
+        const predictiveStress = metrics.predictiveStressLevel || 0;
 
-        // Treasury stress impacts stability
-        if (riskLevel > 2000 || violationRate > 0.1 || treasury < 1000000) {
+        // Treasury stress and predictive signals impact stability
+        if (riskLevel > 2000 || violationRate > 0.1 || treasury < 1000000 || predictiveStress >= 0.8) {
             stability = 'critical';
-        } else if (riskLevel > 1750 || violationRate > 0.05 || treasury < 2500000) {
+        } else if (riskLevel > 1750 || violationRate > 0.05 || treasury < 2500000 || predictiveStress >= 0.4) {
             stability = 'stressed';
         }
 

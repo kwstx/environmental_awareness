@@ -100,30 +100,39 @@ export class RiskEscalationModule extends EventEmitter {
             metrics.aggregateAgentRiskExposure >= this.THRESHOLDS.CRITICAL.riskExposure ||
             metrics.policyViolationFrequency >= this.THRESHOLDS.CRITICAL.violationFrequency ||
             metrics.totalTreasuryReserves <= this.THRESHOLDS.CRITICAL.treasuryMin ||
-            metrics.networkComputeLoad >= this.THRESHOLDS.CRITICAL.computeLoad
+            metrics.networkComputeLoad >= this.THRESHOLDS.CRITICAL.computeLoad ||
+            metrics.predictiveStressLevel >= 0.9
         ) {
             newTier = EscalationTier.CRITICAL;
-            reason = 'CRITICAL: Massive risk detected. Immediate emergency restrictions applied.';
+            reason = metrics.predictiveStressLevel >= 0.9
+                ? 'CRITICAL: Forecasted extreme instability. Proactive emergency measures activated.'
+                : 'CRITICAL: Massive risk detected. Immediate emergency restrictions applied.';
         }
         // Tier 2: High
         else if (
             metrics.aggregateAgentRiskExposure >= this.THRESHOLDS.HIGH.riskExposure ||
             metrics.policyViolationFrequency >= this.THRESHOLDS.HIGH.violationFrequency ||
             metrics.totalTreasuryReserves <= this.THRESHOLDS.HIGH.treasuryMin ||
-            metrics.networkComputeLoad >= this.THRESHOLDS.HIGH.computeLoad
+            metrics.networkComputeLoad >= this.THRESHOLDS.HIGH.computeLoad ||
+            metrics.predictiveStressLevel >= 0.7
         ) {
             newTier = EscalationTier.HIGH;
-            reason = 'HIGH: Significant system stress detected. Multi-agent confirmation activated.';
+            reason = metrics.predictiveStressLevel >= 0.7
+                ? 'HIGH: Forecasted high stress. Proactive multi-agent confirmation activated.'
+                : 'HIGH: Significant system stress detected. Multi-agent confirmation activated.';
         }
         // Tier 1: Elevated
         else if (
             metrics.aggregateAgentRiskExposure >= this.THRESHOLDS.ELEVATED.riskExposure ||
             metrics.policyViolationFrequency >= this.THRESHOLDS.ELEVATED.violationFrequency ||
             metrics.totalTreasuryReserves <= this.THRESHOLDS.ELEVATED.treasuryMin ||
-            metrics.networkComputeLoad >= this.THRESHOLDS.ELEVATED.computeLoad
+            metrics.networkComputeLoad >= this.THRESHOLDS.ELEVATED.computeLoad ||
+            metrics.predictiveStressLevel >= 0.4
         ) {
             newTier = EscalationTier.ELEVATED;
-            reason = 'ELEVATED: Preemptive risk mitigation active. Authority limits tightened.';
+            reason = metrics.predictiveStressLevel >= 0.4
+                ? 'ELEVATED: Forecasted instability markers. Proactive authority tightening.'
+                : 'ELEVATED: Preemptive risk mitigation active. Authority limits tightened.';
         }
 
         // Only update if there's a change to avoid churn

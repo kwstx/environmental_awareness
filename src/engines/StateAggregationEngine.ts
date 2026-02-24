@@ -37,7 +37,8 @@ export class StateAggregationEngine extends EventEmitter {
             networkComputeLoad: 0,
             policyViolationFrequency: 0,
             cooperativeEfficiencyScores: 0,
-            ongoingTaskDensity: 0
+            ongoingTaskDensity: 0,
+            predictiveStressLevel: 0
         };
     }
 
