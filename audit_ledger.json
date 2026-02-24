@@ -1,0 +1,148 @@
+[
+  {
+    "id": "audit-1771959642738-jvjtb58ha",
+    "timestamp": 1771959642738,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 5000000,
+      "pooledBudgetUtilization": 0.2,
+      "aggregateAgentRiskExposure": 500,
+      "networkComputeLoad": 0.3,
+      "policyViolationFrequency": 0.040306689926069034,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0,
+      "predictiveStressLevel": 0
+    },
+    "description": "Environmental state updated via aggregation from 1 providers.",
+    "metadata": {
+      "activeProviders": 1
+    }
+  },
+  {
+    "id": "audit-1771959642813-gq7k5sqs2",
+    "timestamp": 1771959642813,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 5000000,
+      "pooledBudgetUtilization": 0.2,
+      "aggregateAgentRiskExposure": 3500,
+      "networkComputeLoad": 0.3,
+      "policyViolationFrequency": 0.042071352796462735,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0,
+      "predictiveStressLevel": 0
+    },
+    "description": "Environmental state updated via aggregation from 1 providers.",
+    "metadata": {
+      "activeProviders": 1
+    }
+  },
+  {
+    "id": "audit-1771959643020-q01nnwmp7",
+    "timestamp": 1771959643020,
+    "eventType": "ESCALATION_TRIGGER",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 5000000,
+      "pooledBudgetUtilization": 0.2,
+      "aggregateAgentRiskExposure": 3500,
+      "networkComputeLoad": 0.3,
+      "policyViolationFrequency": 0.042071352796462735,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0,
+      "predictiveStressLevel": 0
+    },
+    "description": "HIGH: Significant system stress detected. Multi-agent confirmation activated.",
+    "behavioralAdjustments": {
+      "newTier": "HIGH",
+      "oldTier": "STABLE",
+      "authorityMultiplier": 0.4,
+      "budgetMultiplier": 0.5,
+      "delegationContraction": 0.5
+    },
+    "metadata": {
+      "rationale": "HIGH: Significant system stress detected. Multi-agent confirmation activated."
+    }
+  },
+  {
+    "id": "audit-1771959705093-4tioezo2q",
+    "timestamp": 1771959705093,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 5000000,
+      "pooledBudgetUtilization": 0.2,
+      "aggregateAgentRiskExposure": 500,
+      "networkComputeLoad": 0.3,
+      "policyViolationFrequency": 0.031474241872468535,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0,
+      "predictiveStressLevel": 0
+    },
+    "description": "Environmental state updated via aggregation from 1 providers.",
+    "metadata": {
+      "activeProviders": 1
+    }
+  },
+  {
+    "id": "audit-1771959705096-bvwtavdrb",
+    "timestamp": 1771959705096,
+    "eventType": "ADAPTIVE_CONTRACTION",
+    "contributingMetrics": {
+      "predictiveStressLevel": 0
+    },
+    "affectedAgents": [
+      "agent_test_01"
+    ],
+    "behavioralAdjustments": {
+      "actionFrequencyMultiplier": 0.2,
+      "priorityMode": "cooperative",
+      "budgetReallocationFactor": 1,
+      "riskToleranceLimit": 20
+    },
+    "description": "Adaptive behavior policy computed for agent_test_01: EMERGENCY: Frequency heavily throttled for safety. STABILITY CRITICAL: Defaulting to cooperative mode."
+  },
+  {
+    "id": "audit-1771959705099-i0h365irh",
+    "timestamp": 1771959705099,
+    "eventType": "STATE_CHANGE",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 500000,
+      "pooledBudgetUtilization": 0.2,
+      "aggregateAgentRiskExposure": 3500,
+      "networkComputeLoad": 0.3,
+      "policyViolationFrequency": 0.015038474658279089,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0,
+      "predictiveStressLevel": 0
+    },
+    "description": "Environmental state updated via aggregation from 1 providers.",
+    "metadata": {
+      "activeProviders": 1
+    }
+  },
+  {
+    "id": "audit-1771959705102-omckwiikg",
+    "timestamp": 1771959705102,
+    "eventType": "ESCALATION_TRIGGER",
+    "contributingMetrics": {
+      "totalTreasuryReserves": 500000,
+      "pooledBudgetUtilization": 0.2,
+      "aggregateAgentRiskExposure": 3500,
+      "networkComputeLoad": 0.3,
+      "policyViolationFrequency": 0.015038474658279089,
+      "cooperativeEfficiencyScores": 90,
+      "ongoingTaskDensity": 0,
+      "predictiveStressLevel": 0
+    },
+    "description": "CRITICAL: Massive risk detected. Immediate emergency restrictions applied.",
+    "behavioralAdjustments": {
+      "newTier": "CRITICAL",
+      "oldTier": "STABLE",
+      "authorityMultiplier": 0.1,
+      "budgetMultiplier": 0.2,
+      "delegationContraction": 0.2
+    },
+    "metadata": {
+      "rationale": "CRITICAL: Massive risk detected. Immediate emergency restrictions applied."
+    }
+  }
+]

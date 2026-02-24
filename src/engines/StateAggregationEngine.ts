@@ -1,6 +1,8 @@
 import { EventEmitter } from 'events';
 import { GlobalSystemState, SystemMetrics } from '../models/GlobalSystemState';
 import { DataProvider } from '../interfaces/DataProvider';
+import { EnvironmentAuditLedger } from './EnvironmentAuditLedger';
+import { AuditEventType } from '../interfaces/AuditLog';
 
 export interface EngineConfig {
     updateIntervalMs: number;
@@ -106,6 +108,16 @@ export class StateAggregationEngine extends EventEmitter {
             const newState = GlobalSystemState.snapshot(this.currentMetrics, {
                 activeProviders: this.providers.length,
                 lastCollectionTime: Date.now()
+            });
+
+            // Log state change to immutable ledger
+            EnvironmentAuditLedger.getInstance().logEvent({
+                eventType: AuditEventType.STATE_CHANGE,
+                contributingMetrics: { ...this.currentMetrics },
+                description: `Environmental state updated via aggregation from ${this.providers.length} providers.`,
+                metadata: {
+                    activeProviders: this.providers.length
+                }
             });
 
             this.emit('stateUpdated', newState);

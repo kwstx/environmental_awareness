@@ -1,6 +1,8 @@
 import { GlobalStateAPI } from '../api/GlobalStateAPI';
 import { SystemMetrics } from '../models/GlobalSystemState';
 import { BehaviorPolicy } from '../interfaces/AgentBehavior';
+import { EnvironmentAuditLedger } from './EnvironmentAuditLedger';
+import { AuditEventType } from '../interfaces/AuditLog';
 
 /**
  * AdaptiveBehaviorEngine
@@ -111,6 +113,20 @@ export class AdaptiveBehaviorEngine {
         // Update rationale
         if (rationales.length > 0) {
             policy.rationale = rationales.join(' ');
+
+            // Log adaptive contraction to immutable ledger
+            EnvironmentAuditLedger.getInstance().logEvent({
+                eventType: AuditEventType.ADAPTIVE_CONTRACTION,
+                contributingMetrics: { ...metrics },
+                affectedAgents: [agentId],
+                behavioralAdjustments: {
+                    actionFrequencyMultiplier: policy.actionFrequencyMultiplier,
+                    priorityMode: policy.priorityMode,
+                    budgetReallocationFactor: policy.budgetReallocationFactor,
+                    riskToleranceLimit: policy.riskToleranceLimit
+                },
+                description: `Adaptive behavior policy computed for ${agentId}: ${policy.rationale}`
+            });
         }
 
         return policy;

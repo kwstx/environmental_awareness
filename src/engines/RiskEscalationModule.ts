@@ -2,6 +2,8 @@ import { EventEmitter } from 'events';
 import { StateAggregationEngine } from './StateAggregationEngine';
 import { GlobalSystemState } from '../models/GlobalSystemState';
 import { EscalationTier, RiskEscalationPolicy } from '../interfaces/RiskEscalation';
+import { EnvironmentAuditLedger } from './EnvironmentAuditLedger';
+import { AuditEventType } from '../interfaces/AuditLog';
 
 /**
  * RiskEscalationModule
@@ -149,6 +151,23 @@ export class RiskEscalationModule extends EventEmitter {
                 previousTier: oldTier,
                 timestamp: Date.now()
             });
+
+            // Log escalation trigger to immutable ledger
+            EnvironmentAuditLedger.getInstance().logEvent({
+                eventType: AuditEventType.ESCALATION_TRIGGER,
+                contributingMetrics: { ...state.metrics },
+                description: reason,
+                behavioralAdjustments: {
+                    newTier: EscalationTier[newTier],
+                    oldTier: EscalationTier[oldTier],
+                    authorityMultiplier: this.activePolicy.authorityLimitMultiplier,
+                    budgetMultiplier: this.activePolicy.budgetCeilingMultiplier,
+                    delegationContraction: this.activePolicy.delegationRightsContractionFactor
+                },
+                metadata: {
+                    rationale: reason
+                }
+            });
         }
     }
 
@@ -185,6 +204,17 @@ export class RiskEscalationModule extends EventEmitter {
             ...newThresholds
         };
         console.log(`[RiskEscalationModule] Thresholds updated for ${level}`);
+
+        // Log governance state change to immutable ledger
+        EnvironmentAuditLedger.getInstance().logEvent({
+            eventType: AuditEventType.STATE_CHANGE,
+            contributingMetrics: {},
+            description: `Escalation thresholds updated for ${level}`,
+            behavioralAdjustments: {
+                level,
+                newThresholds
+            }
+        });
     }
 
     /**
@@ -202,6 +232,17 @@ export class RiskEscalationModule extends EventEmitter {
         }
 
         console.log(`[RiskEscalationModule] Tier definition updated for ${EscalationTier[tier]}`);
+
+        // Log governance state change to immutable ledger
+        EnvironmentAuditLedger.getInstance().logEvent({
+            eventType: AuditEventType.STATE_CHANGE,
+            contributingMetrics: {},
+            description: `Tier definition updated for ${EscalationTier[tier]}`,
+            behavioralAdjustments: {
+                tier: EscalationTier[tier],
+                newDefinition: definition
+            }
+        });
     }
 
     /**
