@@ -1,13 +1,19 @@
 {
   "name": "environmental_awareness",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Environmental Awareness layer for real-time system-wide visibility.",
+  "main": "src/example.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node src/example.ts",
+    "test-engine": "ts-node src/testEngine.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "events": "^3.3.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2",
+    "@types/node": "^20.8.6"
+  },
   "type": "commonjs"
 }
