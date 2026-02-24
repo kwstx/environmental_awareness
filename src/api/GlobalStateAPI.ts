@@ -85,13 +85,14 @@ export class GlobalStateAPI {
         // 1. System Stability
         let stability: 'stable' | 'stressed' | 'critical' = 'stable';
 
-        // Adjusting thresholds based on project baseline (e.g. Risk > 2000 is critical)
         const riskLevel = metrics.aggregateAgentRiskExposure;
         const violationRate = metrics.policyViolationFrequency;
+        const treasury = metrics.totalTreasuryReserves;
 
-        if (riskLevel > 2000 || violationRate > 0.1) {
+        // Treasury stress impacts stability
+        if (riskLevel > 2000 || violationRate > 0.1 || treasury < 1000000) {
             stability = 'critical';
-        } else if (riskLevel > 1750 || violationRate > 0.05) {
+        } else if (riskLevel > 1750 || violationRate > 0.05 || treasury < 2500000) {
             stability = 'stressed';
         }
 
@@ -100,6 +101,7 @@ export class GlobalStateAPI {
         const computeLoad = metrics.networkComputeLoad;
         const budgetUsage = metrics.pooledBudgetUtilization;
 
+        // High budget usage relative to reserves (if available) also increases pressure
         if (computeLoad > 0.85 || budgetUsage > 0.9) {
             pressure = 'high';
         } else if (computeLoad > 0.6 || budgetUsage > 0.7) {

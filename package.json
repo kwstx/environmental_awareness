@@ -5,7 +5,8 @@
   "main": "src/example.ts",
   "scripts": {
     "start": "ts-node src/example.ts",
-    "test-engine": "ts-node src/testEngine.ts"
+    "test-engine": "ts-node src/testEngine.ts",
+    "test-validator": "ts-node src/testValidator.ts"
   },
   "dependencies": {
     "events": "^3.3.0"

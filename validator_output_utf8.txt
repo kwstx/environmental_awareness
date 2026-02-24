@@ -1,0 +1,101 @@
+﻿
+> environmental_awareness@1.0.0 test-validator
+> ts-node src/testValidator.ts
+
+--- Pre-Execution Environmental Validation Demo ---
+
+>>> Scenario 1: Stable System (Standard Strictness)
+[PreExecutionValidator] Agent agent_01 action validation: APPROVED
+Result: {
+  "approved": true,
+  "metricsChecked": [
+    "treasury",
+    "risk",
+    "compute"
+  ],
+  "thresholdsApplied": {
+    "budgetLimit": 100000,
+    "riskLimit": 100,
+    "computeLimit": 0.1,
+    "strictnessMultiplier": 1
+  }
+}
+--------------------------------------------------
+
+>>> Scenario 2: Stressed System (Enhanced Strictness)
+Conditions: High Risk Exposure (1800)
+[PreExecutionValidator] Agent agent_01 action validation: APPROVED
+Result: {
+  "approved": true,
+  "metricsChecked": [
+    "treasury",
+    "risk",
+    "compute"
+  ],
+  "thresholdsApplied": {
+    "budgetLimit": 50000,
+    "riskLimit": 50,
+    "computeLimit": 0.05,
+    "strictnessMultiplier": 0.5
+  }
+}
+Note: The same impact is now rejected because thresholds were halved.
+--------------------------------------------------
+
+>>> Scenario 3: Critical/Emergency System (Emergency Strictness)
+Conditions: Critical Risk (2500) and High Compute Load (0.9)
+[PreExecutionValidator] Agent agent_01 action validation: APPROVED
+Result: {
+  "approved": true,
+  "metricsChecked": [
+    "treasury",
+    "risk",
+    "compute"
+  ],
+  "thresholdsApplied": {
+    "budgetLimit": 10000,
+    "riskLimit": 10,
+    "computeLimit": 0.010000000000000002,
+    "strictnessMultiplier": 0.1
+  }
+}
+[PreExecutionValidator] Agent agent_01 action validation: REJECTED
+[PreExecutionValidator] Violations: Risk level (25) exceeds current threshold (10.00), EMERGENCY MODE: High-risk actions are strictly prohibited.
+
+Risky Patch Result: {
+  "approved": false,
+  "reason": "Risk level (25) exceeds current threshold (10.00); EMERGENCY MODE: High-risk actions are strictly prohibited.",
+  "metricsChecked": [
+    "treasury",
+    "risk",
+    "compute"
+  ],
+  "thresholdsApplied": {
+    "budgetLimit": 10000,
+    "riskLimit": 10,
+    "computeLimit": 0.010000000000000002,
+    "strictnessMultiplier": 0.1
+  }
+}
+--------------------------------------------------
+
+>>> Scenario 4: Treasury Stress (Enhanced Strictness)
+Conditions: Low Treasury Reserves (1,500,000)
+[PreExecutionValidator] Agent agent_01 action validation: REJECTED
+[PreExecutionValidator] Violations: Budget impact (60000) exceeds current threshold (50000.00)
+Result: {
+  "approved": false,
+  "reason": "Budget impact (60000) exceeds current threshold (50000.00)",
+  "metricsChecked": [
+    "treasury",
+    "risk",
+    "compute"
+  ],
+  "thresholdsApplied": {
+    "budgetLimit": 50000,
+    "riskLimit": 50,
+    "computeLimit": 0.05,
+    "strictnessMultiplier": 0.5
+  }
+}
+Note: Large budget request rejected due to treasury stress tightening thresholds.
