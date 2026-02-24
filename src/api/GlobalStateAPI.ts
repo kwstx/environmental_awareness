@@ -1,5 +1,7 @@
 import { StateAggregationEngine } from '../engines/StateAggregationEngine';
+import { RiskEscalationModule } from '../engines/RiskEscalationModule';
 import { GlobalSystemState, SystemMetrics } from '../models/GlobalSystemState';
+import { EscalationTier } from '../interfaces/RiskEscalation';
 
 /**
  * AccessPolicy defines what metrics an agent is allowed to view.
@@ -21,6 +23,7 @@ export interface ScopedState {
         systemStability: 'stable' | 'stressed' | 'critical';
         resourcePressure: 'low' | 'moderate' | 'high';
         governanceStrictness: 'standard' | 'enhanced' | 'emergency';
+        escalationTier: EscalationTier;
     };
     version: string;
 }
@@ -34,10 +37,12 @@ export interface ScopedState {
  */
 export class GlobalStateAPI {
     private engine: StateAggregationEngine;
+    private escalationModule?: RiskEscalationModule;
     private policies: Map<string, AccessPolicy> = new Map();
 
-    constructor(engine: StateAggregationEngine) {
+    constructor(engine: StateAggregationEngine, escalationModule?: RiskEscalationModule) {
         this.engine = engine;
+        this.escalationModule = escalationModule;
     }
 
     /**
@@ -109,18 +114,37 @@ export class GlobalStateAPI {
         }
 
         // 3. Governance Strictness
-        // Automatically derives how strictly the system should be governed based on conditions.
+        // If escalation module is available, mapping tiers to strictness labels
         let strictness: 'standard' | 'enhanced' | 'emergency' = 'standard';
-        if (stability === 'critical' || pressure === 'high') {
-            strictness = 'emergency';
-        } else if (stability === 'stressed' || pressure === 'moderate') {
-            strictness = 'enhanced';
+        let escalationTier = EscalationTier.STABLE;
+
+        if (this.escalationModule) {
+            escalationTier = this.escalationModule.getCurrentTier();
+            switch (escalationTier) {
+                case EscalationTier.CRITICAL:
+                    strictness = 'emergency';
+                    break;
+                case EscalationTier.HIGH:
+                case EscalationTier.ELEVATED:
+                    strictness = 'enhanced';
+                    break;
+                default:
+                    strictness = 'standard';
+            }
+        } else {
+            // Fallback to basic derivation if module is not provided
+            if (stability === 'critical' || pressure === 'high') {
+                strictness = 'emergency';
+            } else if (stability === 'stressed' || pressure === 'moderate') {
+                strictness = 'enhanced';
+            }
         }
 
         return {
             systemStability: stability,
             resourcePressure: pressure,
-            governanceStrictness: strictness
+            governanceStrictness: strictness,
+            escalationTier
         };
     }
 

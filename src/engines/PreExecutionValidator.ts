@@ -1,5 +1,7 @@
 import { GlobalStateAPI } from '../api/GlobalStateAPI';
+import { RiskEscalationModule } from './RiskEscalationModule';
 import { ActionImpact, ValidationResult } from '../interfaces/ActionImpact';
+import { EscalationTier } from '../interfaces/RiskEscalation';
 
 /**
  * PreExecutionValidator
@@ -9,6 +11,7 @@ import { ActionImpact, ValidationResult } from '../interfaces/ActionImpact';
  */
 export class PreExecutionValidator {
     private api: GlobalStateAPI;
+    private escalationModule?: RiskEscalationModule;
 
     // Baseline thresholds (when system is stable and pressure is low)
     private readonly baseThresholds = {
@@ -17,8 +20,9 @@ export class PreExecutionValidator {
         maxCompute: 0.1,     // 10% cpu impact
     };
 
-    constructor(api: GlobalStateAPI) {
+    constructor(api: GlobalStateAPI, escalationModule?: RiskEscalationModule) {
         this.api = api;
+        this.escalationModule = escalationModule;
     }
 
     /**
@@ -31,10 +35,25 @@ export class PreExecutionValidator {
         const { macroAwareness } = state;
 
         // 2. Calculate dynamic threshold multipliers
-        const multiplier = this.calculateStrictnessMultiplier(macroAwareness.governanceStrictness);
+        let multiplier = this.calculateStrictnessMultiplier(macroAwareness.governanceStrictness);
+        let budgetMultiplier = multiplier;
+        let authorityMultiplier = 1.0;
+        let validationDepth = 0;
+        let multiAgentRequired = false;
+
+        if (this.escalationModule) {
+            const policy = this.escalationModule.getActivePolicy();
+            budgetMultiplier = policy.budgetCeilingMultiplier;
+            authorityMultiplier = policy.authorityLimitMultiplier;
+            validationDepth = policy.validationDepthBonus;
+            multiAgentRequired = policy.multiAgentConfirmationRequired;
+            // Use the more restrictive multiplier for risk/compute if needed, 
+            // but let's align them with authority for now.
+            multiplier = authorityMultiplier;
+        }
 
         const dynamicThresholds = {
-            budget: this.baseThresholds.maxBudget * multiplier,
+            budget: this.baseThresholds.maxBudget * budgetMultiplier,
             risk: this.baseThresholds.maxRisk * multiplier,
             compute: this.baseThresholds.maxCompute * multiplier
         };
@@ -59,6 +78,11 @@ export class PreExecutionValidator {
             violations.push('EMERGENCY MODE: High-risk actions are strictly prohibited.');
         }
 
+        // 5. Multi-agent confirmation check
+        if (multiAgentRequired && impact.riskLevel > 10) {
+            violations.push(`MULTI-AGENT CONSENSUS REQUIRED: Action risk (${impact.riskLevel}) exceeds consensus-free threshold during ${EscalationTier[macroAwareness.escalationTier]} tier.`);
+        }
+
         const approved = violations.length === 0;
 
         console.log(`[PreExecutionValidator] Agent ${agentId} action validation: ${approved ? 'APPROVED' : 'REJECTED'}`);
@@ -74,7 +98,9 @@ export class PreExecutionValidator {
                 budgetLimit: dynamicThresholds.budget,
                 riskLimit: dynamicThresholds.risk,
                 computeLimit: dynamicThresholds.compute,
-                strictnessMultiplier: multiplier
+                strictnessMultiplier: multiplier,
+                validationDepth,
+                multiAgentRequired
             }
         };
     }

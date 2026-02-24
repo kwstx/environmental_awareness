@@ -28,5 +28,5 @@ export interface ValidationResult {
     approved: boolean;
     reason?: string;
     metricsChecked: string[];
-    thresholdsApplied: Record<string, number>;
+    thresholdsApplied: Record<string, any>;
 }
