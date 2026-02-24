@@ -19,6 +19,11 @@ export interface ActionImpact {
     computeUnits: number;
 
     /**
+     * Whether this action involves delegating authority or tasks to another agent.
+     */
+    isDelegationAction?: boolean;
+
+    /**
      * Optional description of the action.
      */
     description?: string;

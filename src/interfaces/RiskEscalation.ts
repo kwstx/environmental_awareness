@@ -36,9 +36,21 @@ export interface RiskEscalationPolicy {
     authorityLimitMultiplier: number;
 
     /**
+     * Contraction factor for delegation rights. 
+     * Higher values (0.0 to 1.0) indicate how much of the delegation right is preserved.
+     */
+    delegationRightsContractionFactor: number;
+
+    /**
      * Multiplier for the maximum budget an agent can request/utilize (0.0 to 1.0).
      */
     budgetCeilingMultiplier: number;
+
+    /**
+     * Scaling factor for trust-based gating. 
+     * Values > 1.0 increase the required trust score for actions.
+     */
+    trustGatingMultiplier: number;
 
     /**
      * Number of additional validation checks or "depth" required for execution.

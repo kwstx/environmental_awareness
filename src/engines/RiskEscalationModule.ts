@@ -41,28 +41,36 @@ export class RiskEscalationModule extends EventEmitter {
         [EscalationTier.STABLE]: {
             tier: EscalationTier.STABLE,
             authorityLimitMultiplier: 1.0,
+            delegationRightsContractionFactor: 1.0,
             budgetCeilingMultiplier: 1.0,
+            trustGatingMultiplier: 1.0,
             validationDepthBonus: 0,
             multiAgentConfirmationRequired: false
         },
         [EscalationTier.ELEVATED]: {
             tier: EscalationTier.ELEVATED,
             authorityLimitMultiplier: 0.75, // 25% reduction in authority scope
+            delegationRightsContractionFactor: 0.80, // 20% reduction in delegation
             budgetCeilingMultiplier: 0.85, // 15% reduction in budget
+            trustGatingMultiplier: 1.1,     // 10% stricter trust gating
             validationDepthBonus: 1,        // +1 validation check
             multiAgentConfirmationRequired: false
         },
         [EscalationTier.HIGH]: {
             tier: EscalationTier.HIGH,
             authorityLimitMultiplier: 0.40, // 60% reduction in authority
+            delegationRightsContractionFactor: 0.50, // 50% reduction in delegation
             budgetCeilingMultiplier: 0.50, // 50% reduction in budget
+            trustGatingMultiplier: 1.5,     // 50% stricter trust gating
             validationDepthBonus: 3,        // +3 validation checks
             multiAgentConfirmationRequired: true  // Consensus required
         },
         [EscalationTier.CRITICAL]: {
             tier: EscalationTier.CRITICAL,
             authorityLimitMultiplier: 0.10, // 90% reduction (minimal autonomy)
+            delegationRightsContractionFactor: 0.20, // 80% reduction in delegation
             budgetCeilingMultiplier: 0.20, // 80% reduction (emergency only)
+            trustGatingMultiplier: 2.5,     // 150% stricter trust gating
             validationDepthBonus: 6,        // Extreme validation depth
             multiAgentConfirmationRequired: true  // Absolute consensus
         }

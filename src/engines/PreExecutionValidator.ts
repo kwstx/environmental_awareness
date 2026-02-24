@@ -2,6 +2,7 @@ import { GlobalStateAPI } from '../api/GlobalStateAPI';
 import { RiskEscalationModule } from './RiskEscalationModule';
 import { ActionImpact, ValidationResult } from '../interfaces/ActionImpact';
 import { EscalationTier } from '../interfaces/RiskEscalation';
+import { IdentityTrustProvider } from '../providers/IdentityTrustProvider';
 
 /**
  * PreExecutionValidator
@@ -12,17 +13,20 @@ import { EscalationTier } from '../interfaces/RiskEscalation';
 export class PreExecutionValidator {
     private api: GlobalStateAPI;
     private escalationModule?: RiskEscalationModule;
+    private trustProvider?: IdentityTrustProvider;
 
     // Baseline thresholds (when system is stable and pressure is low)
     private readonly baseThresholds = {
         maxBudget: 100000,   // $100k
         maxRisk: 100,        // 100 risk units
         maxCompute: 0.1,     // 10% cpu impact
+        minTrustScore: 40,   // Default minimum trust score
     };
 
-    constructor(api: GlobalStateAPI, escalationModule?: RiskEscalationModule) {
+    constructor(api: GlobalStateAPI, escalationModule?: RiskEscalationModule, trustProvider?: IdentityTrustProvider) {
         this.api = api;
         this.escalationModule = escalationModule;
+        this.trustProvider = trustProvider;
     }
 
     /**
@@ -38,6 +42,8 @@ export class PreExecutionValidator {
         let multiplier = this.calculateStrictnessMultiplier(macroAwareness.governanceStrictness);
         let budgetMultiplier = multiplier;
         let authorityMultiplier = 1.0;
+        let delegationMultiplier = 1.0;
+        let trustMultiplier = 1.0;
         let validationDepth = 0;
         let multiAgentRequired = false;
 
@@ -45,32 +51,53 @@ export class PreExecutionValidator {
             const policy = this.escalationModule.getActivePolicy();
             budgetMultiplier = policy.budgetCeilingMultiplier;
             authorityMultiplier = policy.authorityLimitMultiplier;
+            delegationMultiplier = policy.delegationRightsContractionFactor;
+            trustMultiplier = policy.trustGatingMultiplier;
             validationDepth = policy.validationDepthBonus;
             multiAgentRequired = policy.multiAgentConfirmationRequired;
-            // Use the more restrictive multiplier for risk/compute if needed, 
-            // but let's align them with authority for now.
+
+            // Use authority multiplier as base for risk/compute
             multiplier = authorityMultiplier;
         }
 
         const dynamicThresholds = {
             budget: this.baseThresholds.maxBudget * budgetMultiplier,
             risk: this.baseThresholds.maxRisk * multiplier,
-            compute: this.baseThresholds.maxCompute * multiplier
+            compute: this.baseThresholds.maxCompute * multiplier,
+            trust: this.baseThresholds.minTrustScore * trustMultiplier,
+            delegationRiskLimit: 100 * delegationMultiplier
         };
 
         // 3. Perform validation checks
         const violations: string[] = [];
 
+        // Economic constraint check
         if (impact.budgetRequired > dynamicThresholds.budget) {
-            violations.push(`Budget impact (${impact.budgetRequired}) exceeds current threshold (${dynamicThresholds.budget.toFixed(2)})`);
+            violations.push(`ECONOMIC CONSTRAINT: Budget impact (${impact.budgetRequired}) exceeds current threshold (${dynamicThresholds.budget.toFixed(2)})`);
         }
 
+        // Risk and Compute checks
         if (impact.riskLevel > dynamicThresholds.risk) {
-            violations.push(`Risk level (${impact.riskLevel}) exceeds current threshold (${dynamicThresholds.risk.toFixed(2)})`);
+            violations.push(`RISK CONSTRAINT: Risk level (${impact.riskLevel}) exceeds current threshold (${dynamicThresholds.risk.toFixed(2)})`);
         }
 
         if (impact.computeUnits > dynamicThresholds.compute) {
-            violations.push(`Compute impact (${impact.computeUnits}) exceeds current threshold (${dynamicThresholds.compute.toFixed(2)})`);
+            violations.push(`RESOURCE CONSTRAINT: Compute impact (${impact.computeUnits}) exceeds current threshold (${dynamicThresholds.compute.toFixed(2)})`);
+        }
+
+        // Delegation rights contraction check
+        if (impact.isDelegationAction) {
+            if (impact.riskLevel > dynamicThresholds.delegationRiskLimit) {
+                violations.push(`DELEGATION CONTRACTION: High-risk delegation (${impact.riskLevel}) blocked by current contraction factor (${delegationMultiplier.toFixed(2)})`);
+            }
+        }
+
+        // Trust-based gating check
+        if (this.trustProvider) {
+            const agentTrust = await this.trustProvider.getAgentTrustScore(agentId);
+            if (agentTrust < dynamicThresholds.trust) {
+                violations.push(`TRUST GATING: Agent trust score (${agentTrust.toFixed(2)}) is below required threshold (${dynamicThresholds.trust.toFixed(2)}) for current risk tier.`);
+            }
         }
 
         // 4. Special "Hard Stop" for emergency mode
@@ -93,11 +120,13 @@ export class PreExecutionValidator {
         return {
             approved,
             reason: approved ? undefined : violations.join('; '),
-            metricsChecked: ['treasury', 'risk', 'compute'],
+            metricsChecked: ['treasury', 'risk', 'compute', 'trust', 'delegation'],
             thresholdsApplied: {
                 budgetLimit: dynamicThresholds.budget,
                 riskLimit: dynamicThresholds.risk,
                 computeLimit: dynamicThresholds.compute,
+                trustThreshold: dynamicThresholds.trust,
+                delegationLimit: dynamicThresholds.delegationRiskLimit,
                 strictnessMultiplier: multiplier,
                 validationDepth,
                 multiAgentRequired

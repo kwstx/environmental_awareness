@@ -1,0 +1,84 @@
+﻿=== Multi-Layer Risk Integration Test ===
+
+[StateAggregationEngine] Provider registered: DynamicRiskProvider
+[StateAggregationEngine] Engine started. Update interval: 500ms
+
+--- STABLE: Normal Action ---
+Agent: agent-alpha, Action: Routine Maintenance
+[PreExecutionValidator] Agent agent-alpha action validation: APPROVED
+Result: έεΖ APPROVED
+Trust Threshold: 40.00
+Delegation Limit: 100.00
+Budget Limit: 100000.00
+
+--- STABLE: Delegation Action ---
+Agent: agent-alpha, Action: Delegate Sub-task
+[PreExecutionValidator] Agent agent-alpha action validation: APPROVED
+Result: έεΖ APPROVED
+Trust Threshold: 40.00
+Delegation Limit: 100.00
+Budget Limit: 100000.00
+
+[Simulating] Rising Risk Exposure (ELEVATED)...
+[RiskEscalationModule] TIER CHANGE: STABLE -> ELEVATED
+[RiskEscalationModule] Rationale: ELEVATED: Preemptive risk mitigation active. Authority limits tightened.
+
+--- ELEVATED: Normal Action (Should Pass) ---
+Agent: agent-alpha, Action: Routine Maintenance
+[PreExecutionValidator] Agent agent-alpha action validation: APPROVED
+Result: έεΖ APPROVED
+Trust Threshold: 44.00
+Delegation Limit: 80.00
+Budget Limit: 85000.00
+
+--- ELEVATED: Delegation Action (Contracted?) ---
+Agent: agent-alpha, Action: Delegate Sub-task
+[PreExecutionValidator] Agent agent-alpha action validation: APPROVED
+Result: έεΖ APPROVED
+Trust Threshold: 44.00
+Delegation Limit: 80.00
+Budget Limit: 85000.00
+
+[Simulating] System Stress (HIGH)...
+[RiskEscalationModule] TIER CHANGE: ELEVATED -> HIGH
+[RiskEscalationModule] Rationale: HIGH: Significant system stress detected. Multi-agent confirmation activated.
+
+--- HIGH: High-Risk Delegation (Should Fail) ---
+Agent: agent-alpha, Action: Complex Delegation
+[PreExecutionValidator] Agent agent-alpha action validation: REJECTED
+[PreExecutionValidator] Violations: RISK CONSTRAINT: Risk level (60) exceeds current threshold (40.00), RESOURCE CONSTRAINT: Compute impact (0.05) exceeds current threshold (0.04), DELEGATION CONTRACTION: High-risk delegation (60) blocked by current contraction factor (0.50), MULTI-AGENT CONSENSUS REQUIRED: Action risk (60) exceeds consensus-free threshold during HIGH tier.
+Result: έζΝ REJECTED
+Reason: RISK CONSTRAINT: Risk level (60) exceeds current threshold (40.00); RESOURCE CONSTRAINT: Compute impact (0.05) exceeds current threshold (0.04); DELEGATION CONTRACTION: High-risk delegation (60) blocked by current contraction factor (0.50); MULTI-AGENT CONSENSUS REQUIRED: Action risk (60) exceeds consensus-free threshold during HIGH tier.
+Trust Threshold: 60.00
+Delegation Limit: 50.00
+Budget Limit: 50000.00
+
+[Simulating] CRITICAL EMERGENCY...
+[RiskEscalationModule] TIER CHANGE: HIGH -> CRITICAL
+[RiskEscalationModule] Rationale: CRITICAL: Massive risk detected. Immediate emergency restrictions applied.
+
+--- CRITICAL: Even routine actions might fail trust gating (Threshold 100) ---
+Agent: agent-alpha, Action: Routine Maintenance
+[PreExecutionValidator] Agent agent-alpha action validation: REJECTED
+[PreExecutionValidator] Violations: TRUST GATING: Agent trust score (93.00) is below required threshold (100.00) for current risk tier.
+Result: έζΝ REJECTED
+Reason: TRUST GATING: Agent trust score (93.00) is below required threshold (100.00) for current risk tier.
+Trust Threshold: 100.00
+Delegation Limit: 20.00
+Budget Limit: 20000.00
+
+[Simulating] Environment Recovery...
+[RiskEscalationModule] TIER CHANGE: CRITICAL -> STABLE
+[RiskEscalationModule] Rationale: System is operating within normal parameters.
+
+--- RECOVERY: Delegation Action (Should Pass again) ---
+Agent: agent-alpha, Action: Complex Delegation
+[PreExecutionValidator] Agent agent-alpha action validation: APPROVED
+Result: έεΖ APPROVED
+Trust Threshold: 40.00
+Delegation Limit: 100.00
+Budget Limit: 100000.00
+[StateAggregationEngine] Engine stopped.
+
+Integration test completed.
+
